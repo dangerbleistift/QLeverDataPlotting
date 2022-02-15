@@ -7,14 +7,22 @@
     </head>
     <body>
         <h1>D3 Charts v0.2</h1>
-        <div id="navbar-data"  style="padding:10px; border:1px transparent black">
-            <button class="btn" type="button" onclick="changeDataset('data_eyes')">Eyes</button>
-            <button class="btn" type="button" onclick="changeDataset('data_population')">Population</button>
-        </div>
-        <div id="navbar-charttype"style="padding:10px; border:1px transparent black">
-            <button class="btn" type="button" onclick="changePlotType('chart_bubble')">Circle</button>
-            <button class="btn" type="button" onclick="changePlotType('chart_bar')">Barchart</button>
-            <button class="btn" type="button" onclick="changePlotType('chart_lineplot')">Lineplot</button>
+        <div id="navbar-sort"  style="padding:10px; border:1px transparent black">
+            <select class="btn" id="data" onchange="changeDataset(this.value)" >
+                <option value="data_eyes">Eyes</option>
+                <option value="data_population">Population</option>
+                <option value="data_births">Births</option>
+            </select>
+            <select class="btn" id="plot" onchange="changePlotType(this.value)" >
+                <option value="chart_bubble">Circle</option>
+                <option value="chart_bar">Barchart</option>
+                <option value="chart_lineplot">Lineplot</option>
+            </select>
+            <select class="btn" id="sorting" onchange="changeSorting(this.value)" >
+                <option value="descending">Descending</option>
+                <option value="ascending">Ascending</option>
+                <option value="unsorted">Unsorted</option>
+            </select>
         </div>
         <div id="chart" style="border:1px transparent black"></div>        <script type="text/javascript" src="static/js/generic_barchart.js"></script>
         <script type="text/javascript" src="static/js/sparqlQueryDispatcher.js"></script>

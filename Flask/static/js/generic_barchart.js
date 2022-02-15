@@ -39,6 +39,9 @@ function barchart(dataset)
     g.append("g")
         .attr("transform", `translate(${0}, ${chartHeight})`)
         .call(d3.axisBottom(xScale))
+        .selectAll("text")
+        .style("text-anchor", "start")
+        .attr("transform", " rotate(10)")
 
     // Draw y axis
     g.append("g")

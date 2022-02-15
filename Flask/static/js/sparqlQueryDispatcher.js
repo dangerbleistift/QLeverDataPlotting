@@ -27,13 +27,23 @@ GROUP BY ?eyeColorLabel`;
 
 const sparqlQuery_population = `#Countries sorted by population
 # defaultView:BubbleChart
-SELECT DISTINCT ?countryLabel ?population
+SELECT DISTINCT ?countryLabel ?count
 {
   ?country wdt:P31 wd:Q6256 ;
-           wdt:P1082 ?population .
+           wdt:P1082 ?count .
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
-GROUP BY ?population ?countryLabel`
+GROUP BY ?count ?countryLabel`
+
+const sparqlQuery_birth = `#Population growth in Suriname from 1960 onward
+#defaultView:LineChart
+SELECT ?year ?count {
+  wd:Q730 p:P1082 ?p .
+  ?p pq:P585 ?year ;
+     ps:P1082 ?count .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY ?year`
 
 
 function executeQuery(sparqlQuery) {

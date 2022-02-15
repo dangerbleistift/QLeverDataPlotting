@@ -1,6 +1,7 @@
 // global datasets
 var currentDataset = 'data_eyes';
 var currentPlotType = 'chart_bubble';
+var currentSorting = 'descending';
 
 function changePlotType(newPlotType) 
 {
@@ -12,6 +13,12 @@ function changeDataset(newDataSet)
 {
     currentDataset = newDataSet
 
+    plot()
+}
+
+function changeSorting(newSorting)
+{
+    currentSorting = newSorting
     plot()
 }
 
@@ -43,10 +50,22 @@ function queryCurrentDataset() {
         case 'data_population':
             query = sparqlQuery_population
             break;
+        case 'data_births':
+            query = sparqlQuery_birth
+            break;
     }
     return executeQuery(query).then(result => {
-        return convertToLabelValueList(result)
+        return sort(convertToLabelValueList(result))
     })
+
+}
+
+function sort(array) 
+{
+    if (currentSorting != "unsorted") {
+        array = array.sort((a, b) => {return currentSorting == "descending" ? b.value - a.value : a.value - b.value})
+    }
+    return array
 }
 
 
@@ -57,8 +76,6 @@ function convertToLabelValueList(dataset) {
     dataset.forEach(item => {
         array.push(extractDataFromObject(item))
     })
-    // Sort descending
-    array = array.sort((a, b) =>  {return b.value - a.value})
     return array
 }
 
@@ -69,7 +86,7 @@ function extractDataFromObject(dataObject) {
         var item = dataObject[key]
 
         // Value of result is stored in object containing property datatype
-        if (item.hasOwnProperty('datatype')) {
+        if (key == "count") {
             object.value = Number(item.value)
         }
         else {
