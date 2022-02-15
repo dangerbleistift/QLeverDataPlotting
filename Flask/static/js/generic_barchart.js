@@ -3,12 +3,12 @@
 
 function barchart(dataset)
 {
-    var margin = 50
+    var margin = 80
     var padding = 5
     var barWidth = 60
 
     // Fix svg Height
-    var svgHeight = 400
+    var svgHeight = 500
     var chartHeight = svgHeight - 2 * margin
 
     // svg Width scaling with number of items in dataset

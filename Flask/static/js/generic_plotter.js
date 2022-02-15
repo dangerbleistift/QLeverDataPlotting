@@ -1,38 +1,54 @@
 // global datasets
-var currentDataset;
-var currentPlotName;
+var currentDataset = 'data_eyes';
+var currentPlotType = 'chart_bubble';
 
-function plot(plotName) {
-    currentPlotName = plotName
+function changePlotType(newPlotType) 
+{
+    currentPlotType = newPlotType
+    plot()
+}
+
+function changeDataset(newDataSet)
+{
+    currentDataset = newDataSet
+
+    plot()
+}
+
+function plot() {
+    // Reset div
     document.getElementById('chart').innerHTML=""
-    switch(plotName) {
-        case 'chart_bar':
-            barchart(currentDataset);
-            break;
-        case 'chart_bubble':
-            bubblechart(currentDataset);
-            break;
-        case 'chart_lineplot':
-            break;
-        default:
-            console.error('Unknown plot type: ' + plotName);
-    }
+    // Get data async
+    queryCurrentDataset().then(dataset => {
+        switch (currentPlotType) {
+            case 'chart_bar':
+                barchart(dataset);
+                break;
+            case 'chart_bubble':
+                bubblechart(dataset);
+                break;
+            case 'chart_lineplot':
+                break;
+        }
+    })
 }
 
-
-function data(datasetName) {
-    switch(datasetName) {
+// Async wikidata query call
+function queryCurrentDataset() {
+    var query;
+    switch(currentDataset) {
         case 'data_eyes':
-            currentDataset = convertToLabelValueList(datasets['eyes'])
+            query = sparqlQuery_eyeColors
             break;
-        case 'data_eyes_half':
-            currentDataset = convertToLabelValueList(datasets['halfeyes'])
+        case 'data_population':
+            query = sparqlQuery_population
             break;
-        default:
-            console.error('Unknown dataset: ' + datasetName);
     }
-    plot(currentPlotName)
+    return executeQuery(query).then(result => {
+        return convertToLabelValueList(result)
+    })
 }
+
 
 // Convert list of wikidata-results list of {'label', 'value'} objects
 function convertToLabelValueList(dataset) {
@@ -50,14 +66,14 @@ function convertToLabelValueList(dataset) {
 function extractDataFromObject(dataObject) {    
     var object = {}
     Object.keys(dataObject).forEach(key => {
-        var propertyValue = dataObject[key]
-        var propertyValueAsNumber = Number(propertyValue)
-        // Check if property is a number or NAN and set return objects property accordingly
-        if (propertyValueAsNumber) {
-            object.value = propertyValueAsNumber
+        var item = dataObject[key]
+
+        // Value of result is stored in object containing property datatype
+        if (item.hasOwnProperty('datatype')) {
+            object.value = Number(item.value)
         }
         else {
-            object.label = propertyValue
+            object.label = item.value
         }
 
     })
@@ -66,8 +82,7 @@ function extractDataFromObject(dataObject) {
 
 }
 
-data('data_eyes_half');
-plot('chart_bubble');
+plot()
 
 
 

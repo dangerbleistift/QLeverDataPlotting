@@ -3,22 +3,21 @@
     <head>
         <script type="text/javascript" src="static/js/libs/d3.js"></script>
         <link rel="stylesheet" href='/static/css/main.css' />
-        <script type="text/javascript">
-            var datasets = {{ datasets|tojson }}
-        </script>
     </head>
     <body>
-        <h1>D3 Charts</h1>
+        <h1>D3 Charts v0.2</h1>
         <div id="navbar-data"  style="padding:10px; border:1px transparent black">
-            <button type="button" onclick="data('data_eyes')">Eyes</button>
-            <button type="button" onclick="data('data_eyes_half')">Half Eyes</button>
+            <button type="button" onclick="changeDataset('data_eyes')">Eyes</button>
+            <button type="button" onclick="changeDataset('data_population')">Population</button>
         </div>
         <div id="navbar-charttype"style="padding:10px; border:1px transparent black">
-            <button type="button" onclick="plot('chart_bar')">Barchart</button>
-            <button type="button" onclick="plot('chart_bubble')">Circle</button>
-            <button type="button" onclick="plot('chart_lineplot')">Lineplot</button>
+            <button type="button" onclick="changePlotType('chart_bar')">Barchart</button>
+            <button type="button" onclick="changePlotType('chart_bubble')">Circle</button>
+            <button type="button" onclick="changePlotType('chart_lineplot')">Lineplot</button>
         </div>
-        <div id="chart" style="border:1px transparent black"></div>
+        <div id="chart" style="border:1px transparent black"></div>        <script type="text/javascript" src="static/js/generic_barchart.js"></script>
+        <script type="text/javascript" src="static/js/sparqlQueryDispatcher.js"></script>
+
         <script type="text/javascript" src="static/js/generic_barchart.js"></script>
         <script type="text/javascript" src="static/js/generic_bubblechart.js"></script>
 

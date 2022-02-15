@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, render_template
 import json
 app = Flask(__name__)
 app.debug=True
@@ -22,16 +22,7 @@ def d3_sample():
 
 @app.route('/charts')
 def charts():
-    datasets = {}
-    with open('data/eyecolors.json') as f:
-        raw_data = json.load(f)
-        raw_data_half = [raw_data[x] for x in range(len(raw_data)) if x % 2]
-
-        datasets['eyes'] = raw_data
-        datasets['halfeyes'] = raw_data_half
-    #TODO: Load multiple datasets. For right now emulate two sets
-    
-    return render_template('charts.html', datasets=datasets)
+    return render_template('charts.html')
 
 
 if __name__ == '__main__':
