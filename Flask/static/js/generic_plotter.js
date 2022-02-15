@@ -9,7 +9,8 @@ function plot(plotName) {
         case 'chart_bar':
             barchart(currentDataset);
             break;
-        case 'chart_circle':
+        case 'chart_bubble':
+            bubblechart(currentDataset);
             break;
         case 'chart_lineplot':
             break;
@@ -66,7 +67,7 @@ function extractDataFromObject(dataObject) {
 }
 
 data('data_eyes_half');
-plot('chart_bar');
+plot('chart_bubble');
 
 
 
