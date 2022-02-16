@@ -1,7 +1,7 @@
 // global datasets
-var currentDataset = 'data_eyes';
-var currentPlotType = 'chart_bar';
-var currentSorting = 'descending';
+var currentDataset = document.getElementById("data").value;
+var currentPlotType = document.getElementById("plot").value;
+var currentSorting = document.getElementById("sorting").value;
 
 function changePlotType(newPlotType) 
 {
