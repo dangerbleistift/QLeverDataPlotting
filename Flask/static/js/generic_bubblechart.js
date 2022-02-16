@@ -1,4 +1,3 @@
-
 function bubblechart(dataset)
 {
     // setup sizes

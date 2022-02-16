@@ -1,11 +1,6 @@
-
-
-
 function linechart(dataset)
 {
     var margin = 80
-    var padding = 5
-    var barWidth = 60
 
     // Fix svg Height
     var svgHeight = 500
@@ -46,8 +41,8 @@ function linechart(dataset)
     // Draw y axis
     g.append("g")
         .call(d3.axisLeft(yScale))
-    // Add data bars to plot
-    var bars = g.append("path")
+    // Add data to plot
+    g.append("path")
         .datum(dataset)
             .attr("fill", "none")
             .attr("stroke", "black")
@@ -56,17 +51,5 @@ function linechart(dataset)
                 .x(item => {return xScale(new Date(item.label))})
                 .y(item => yScale(item.value))
             )
-}
-
-/**
- *  Gets the maximum value in a collection of {'label', 'value'} objects
- */
- function getMax(collection) {
-    var max = 0
-    collection.forEach(element => {
-        var value = element.value
-        max = value > max ? value : max
-    })
-    return max;
 }
 

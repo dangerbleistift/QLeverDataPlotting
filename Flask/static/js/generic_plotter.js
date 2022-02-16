@@ -1,6 +1,6 @@
 // global datasets
-var currentDataset = 'data_births';
-var currentPlotType = 'chart_line';
+var currentDataset = 'data_eyes';
+var currentPlotType = 'chart_bar';
 var currentSorting = 'descending';
 
 function changePlotType(newPlotType) 
