@@ -1,6 +1,6 @@
 // global datasets
-var currentDataset = 'data_eyes';
-var currentPlotType = 'chart_bubble';
+var currentDataset = 'data_births';
+var currentPlotType = 'chart_line';
 var currentSorting = 'descending';
 
 function changePlotType(newPlotType) 
@@ -34,7 +34,8 @@ function plot() {
             case 'chart_bubble':
                 bubblechart(dataset);
                 break;
-            case 'chart_lineplot':
+            case 'chart_line':
+                linechart(dataset);
                 break;
         }
     })
