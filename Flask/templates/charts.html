@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+    <head>
+        <script type="text/javascript" src="static/js/libs/d3.js"></script>
+        <link rel="stylesheet" href='/static/css/main.css' />
+       
+    </head>
+    <body>
+        <h1>D3 Charts v0.2</h1>
+        <div id="navbar-sort"  style="padding:10px; border:1px transparent black">
+            <select class="btn" id="data" onchange="changeDataset(this.value)" >
+                <option value="data_eyes">Eyes</option>
+                <option value="data_population">Population</option>
+                <option value="data_births">Births</option>
+            </select>
+            <select class="btn" id="plot" onchange="changePlotType(this.value)" >
+                <option value="chart_bubble">Circle</option>
+                <option value="chart_bar">Barchart</option>
+                <option value="chart_line">Lineplot</option>
+            </select>
+            <select class="btn" id="sorting" onchange="changeSorting(this.value)" >
+                <option value="descending">Descending</option>
+                <option value="ascending">Ascending</option>
+                <option value="unsorted">Unsorted</option>
+            </select>
+        </div>
+        <div id="chart" style="border:1px transparent black"></div>        <script type="text/javascript" src="static/js/generic_barchart.js"></script>
+        <script type="text/javascript" src="static/js/sparqlQueryDispatcher.js"></script>
+
+        <script type="text/javascript" src="static/js/generic_barchart.js"></script>
+        <script type="text/javascript" src="static/js/generic_bubblechart.js"></script>
+        <script type="text/javascript" src="static/js/generic_linechart.js"></script>
+
+        <script type="text/javascript" src="static/js/generic_plotter.js"></script>
+
+    </body>
+</html>

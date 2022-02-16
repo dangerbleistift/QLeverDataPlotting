@@ -4,14 +4,25 @@ body {
     margin-left: 100px;
     }
   
-  p {
-    font-family: Georgia, serif;
-    font-size: 1.2em;
-    color: DarkSlateGray;
-    }
-  
-  h1 {
-    font-family: Verdana, Geneva, sans-serif;
-    font-size: 2.5em;
-    color: FireBrick;
-    }
+p {
+  font-family: Georgia, serif;
+  font-size: 1.2em;
+  color: DarkSlateGray;
+  }
+
+h1 {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 2.5em;
+  color: FireBrick;
+  }
+
+.btn{
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+}
+

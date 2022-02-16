@@ -1,4 +1,5 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, render_template, send_from_directory
+import os
 import json
 app = Flask(__name__)
 app.debug=True
@@ -16,9 +17,18 @@ def eyes():
             data[result['eyeColorLabel']] = result['count']
     return render_template('table.html', data=data)
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),   'favicon.png', mimetype='image/vnd.microsoft.icon')
+ 
+
 @app.route('/d3_sample')
 def d3_sample():
     return render_template('d3_sample.html')
+
+@app.route('/charts')
+def charts():
+    return render_template('charts.html')
 
 
 if __name__ == '__main__':
