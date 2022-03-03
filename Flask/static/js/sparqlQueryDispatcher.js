@@ -33,7 +33,7 @@ SELECT DISTINCT ?countryLabel ?count
            wdt:P1082 ?count .
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
-GROUP BY ?count ?countryLabel`
+GROUP BY ?count ?countryLabel`;
 
 const sparqlQuery_birth = `#Population growth in Suriname from 1960 onward
 #defaultView:LineChart
@@ -43,14 +43,14 @@ SELECT ?year ?count {
      ps:P1082 ?count .
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
-ORDER BY ?year`
+ORDER BY ?year`;
 
 
 function executeQuery(sparqlQuery) {
     var endpointUrl = 'https://query.wikidata.org/sparql';
     var queryDispatcher = new SPARQLQueryDispatcher( endpointUrl );
     return queryDispatcher.query( sparqlQuery ).then( result => {
-        return result.results.bindings
+        return result.results.bindings;
     } );
 
 }
