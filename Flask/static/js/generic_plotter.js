@@ -1,7 +1,9 @@
 // global datasets
-var currentDataset = document.getElementById("data").value;
+var currentDataQuery = document.getElementById("query").value;
 var currentPlotType = document.getElementById("plot").value;
 var currentSorting = document.getElementById("sorting").value;
+
+var currentDataSet = []
 
 function changePlotType(newPlotType) 
 {
@@ -9,11 +11,21 @@ function changePlotType(newPlotType)
     plot()
 }
 
-function changeDataset(newDataSet)
+function changeDataQuery(newDataSet)
 {
-    currentDataset = newDataSet
+    currentDataQuery = newDataSet
+    queryAndPlot();
+}
 
-    plot()
+// Asynchronously query data from current sparql query and plot it.
+function queryAndPlot() 
+{
+    resetChartDiv();
+    // Get data async
+    queryCurrentDataset().then(dataset => {
+        currentDataSet = dataset;
+        plot();
+    })
 }
 
 function changeSorting(newSorting)
@@ -22,29 +34,32 @@ function changeSorting(newSorting)
     plot()
 }
 
-function plot() {
+// Clears the div of the chart
+function resetChartDiv()
+{
     // Reset div
     document.getElementById('chart').innerHTML=""
-    // Get data async
-    queryCurrentDataset().then(dataset => {
-        switch (currentPlotType) {
-            case 'chart_bar':
-                barchart(dataset);
-                break;
-            case 'chart_bubble':
-                bubblechart(dataset);
-                break;
-            case 'chart_line':
-                linechart(dataset);
-                break;
-        }
-    })
+}
+
+function plot() {
+    resetChartDiv();
+    switch (currentPlotType) {
+        case 'chart_bar':
+            barchart(currentDataSet);
+            break;
+        case 'chart_bubble':
+            bubblechart(currentDataSet);
+            break;
+        case 'chart_line':
+            linechart(currentDataSet);
+            break;
+    }
 }
 
 // Async wikidata query call
 function queryCurrentDataset() {
     var query;
-    switch(currentDataset) {
+    switch(currentDataQuery) {
         case 'data_eyes':
             query = sparqlQuery_eyeColors
             break;
@@ -100,6 +115,6 @@ function extractDataFromObject(dataObject) {
 
 }
 
-plot()
+queryAndPlot()
 
 
