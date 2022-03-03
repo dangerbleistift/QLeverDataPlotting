@@ -23,6 +23,7 @@ function queryAndPlot()
     resetChartDiv();
     // Get data async
     queryCurrentDataset().then(dataset => {
+        console.log(dataset);
         currentDataSet = dataset;
         plot();
     });
@@ -43,15 +44,16 @@ function resetChartDiv()
 
 function plot() {
     resetChartDiv();
+    var sortedDataSet = sort(currentDataSet);
     switch (currentPlotType) {
         case 'chart_bar':
-            barchart(currentDataSet);
+            barchart(sortedDataSet);
             break;
         case 'chart_bubble':
-            bubblechart(currentDataSet);
+            bubblechart(sortedDataSet);
             break;
         case 'chart_line':
-            linechart(currentDataSet);
+            linechart(sortedDataSet);
             break;
     }
 }
@@ -71,17 +73,18 @@ function queryCurrentDataset() {
             break;
     }
     return executeQuery(query).then(result => {
-        return sort(convertToLabelValueList(result));
+        return convertToLabelValueList(result);
     });
 
 }
 
 function sort(array) 
 {
+    var sortedArray = [...array];
     if (currentSorting != "unsorted") {
-        array = array.sort((a, b) => {return currentSorting == "descending" ? b.value - a.value : a.value - b.value;});
+        sortedArray.sort((a, b) => {return currentSorting == "descending" ? b.value - a.value : a.value - b.value;});
     }
-    return array;
+    return sortedArray;
 }
 
 
