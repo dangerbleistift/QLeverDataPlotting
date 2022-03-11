@@ -5,6 +5,38 @@ var currentSorting = document.getElementById("sorting").value;
 
 var currentDataSet = [];
 
+// Button controlled loading of preset settings.
+function loadPreset(preset)
+{
+    switch(preset) {
+        case 'eyes':
+            currentDataQuery = "data_eyes";
+            currentPlotType = "chart_bubble";
+            currentSorting = "unsorted";
+            break;
+        case 'population':
+            currentDataQuery = "data_population";
+            currentPlotType = "chart_bar";
+            currentSorting = "descending";
+            break;
+        case 'births':
+            currentDataQuery = "data_births";
+            currentPlotType = "chart_line";
+            currentSorting = "unsorted";
+            break;
+    }
+    matchNavbarToPreset();
+    queryAndPlot();
+}
+
+// Sets the values in the dropdown menus to the current settings.
+function matchNavbarToPreset()
+{
+    document.getElementById("query").value = currentDataQuery;
+    document.getElementById("plot").value = currentPlotType;
+    document.getElementById("sorting").value = currentSorting;
+}
+
 function changePlotType(newPlotType) 
 {
     currentPlotType = newPlotType;
@@ -23,7 +55,6 @@ function queryAndPlot()
     resetChartDiv();
     // Get data async
     queryCurrentDataset().then(dataset => {
-        console.log(dataset);
         currentDataSet = dataset;
         plot();
     });
@@ -78,6 +109,7 @@ function queryCurrentDataset() {
 
 }
 
+// Sorts an Array
 function sort(array) 
 {
     var sortedArray = [...array];

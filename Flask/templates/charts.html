@@ -7,6 +7,12 @@
     </head>
     <body>
         <h1>D3 Charts v0.3</h1>
+        <div id="navbar-preset" style="padding:10px; border:1px transparent black">
+            <button type="button" class="btn" onclick="loadPreset('eyes')">Eyecolors</button>
+            <button type="button" class="btn" onclick="loadPreset('population')">Population</button>
+            <button type="button" class="btn" onclick="loadPreset('births')">Births</button>
+
+        </div>
         <div id="navbar-sort"  style="padding:10px; border:1px transparent black">
             <select class="btn" id="query" onchange="changeDataQuery(this.value)" >
                 <option value="data_eyes">Eyes</option>
